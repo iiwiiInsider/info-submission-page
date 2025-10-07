@@ -16,7 +16,7 @@ services:
         sync: false
       - key: MAIL_FROM
         sync: false
-  buildCommand: ./scripts/render-build.sh
+  buildCommand: npm ci && npm run build
     startCommand: npm start
     autoDeploy: true
     plan: free

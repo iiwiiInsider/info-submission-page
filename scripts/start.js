@@ -16,7 +16,7 @@ function run(cmd) {
 if (!existsSync(__dirname + '/../server/dist/index.js')) {
   console.log('[start] Build output missing, running build...');
   try {
-    run('npm run build:server');
+  run('npm run build');
   } catch (e) {
     console.error('[start] Build failed.', e);
     process.exit(1);
