@@ -16,7 +16,7 @@ services:
         sync: false
       - key: MAIL_FROM
         sync: false
-    buildCommand: npm install --workspaces && npm run build
+  buildCommand: ./scripts/render-build.sh
     startCommand: npm start
     autoDeploy: true
     plan: free
