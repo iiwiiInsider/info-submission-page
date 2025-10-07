@@ -2,8 +2,8 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY package.json package-lock.json* ./
-RUN npm ci
 COPY server server
+RUN npm ci
 COPY client/public client/public
 RUN npm run build:server
 
