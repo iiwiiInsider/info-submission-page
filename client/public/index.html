@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mandate Submission</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; margin: 2rem; background:#f5f7fa; }
+    h1 { font-size: 1.6rem; }
+    form { max-width: 480px; background:#fff; padding:1.5rem 2rem; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); }
+    label { display:block; margin-top:1rem; font-weight:600; }
+    input { width:100%; padding:.65rem .75rem; margin-top:.35rem; border:1px solid #ccc; border-radius:8px; font-size:1rem; }
+    button { margin-top:1.25rem; padding:.75rem 1.25rem; font-size:1rem; border:none; background:#2563eb; color:#fff; border-radius:8px; cursor:pointer; font-weight:600; }
+    button:disabled { background:#94a3b8; cursor:not-allowed; }
+    .success { margin-top:1rem; color:#065f46; background:#d1fae5; padding:.75rem 1rem; border-radius:8px; }
+    .error { margin-top:1rem; color:#991b1b; background:#fee2e2; padding:.75rem 1rem; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <h1>Mandate Sign Confirmation</h1>
+  <p>Enter your details below. You will receive a confirmation email after submitting.</p>
+  <form id="mandateForm">
+    <label> Government ID
+      <input required name="govId" placeholder="e.g. Passport / National ID" />
+    </label>
+    <label> Full Name
+      <input required name="fullName" />
+    </label>
+    <label> Email
+      <input required type="email" name="email" />
+    </label>
+    <label> Phone Number
+      <input required type="tel" name="phone" />
+    </label>
+    <label> Mandate ID
+      <input required name="mandateId" />
+    </label>
+    <button type="submit">Submit</button>
+    <div id="status"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById('mandateForm');
+    const statusBox = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      statusBox.textContent = '';
+      statusBox.className='';
+      const data = Object.fromEntries(new FormData(form).entries());
+      try {
+        const res = await fetch('/api/mandates/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.message || 'Submission failed');
+        statusBox.textContent = json.message || 'Submission successful, please check your email.';
+        statusBox.className = 'success';
+        form.reset();
+      } catch (err) {
+        statusBox.textContent = err.message || 'Unexpected error';
+        statusBox.className = 'error';
+      }
+    });
+  </script>
+</body>
+</html>

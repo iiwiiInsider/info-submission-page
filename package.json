@@ -1,0 +1,31 @@
+{
+  "name": "info-submission-page",
+  "version": "1.0.0",
+  "description": "Simple mandate info submission webapp (Express + TypeScript + static HTML form).",
+  "private": false,
+  "license": "MIT",
+  "workspaces": [
+    "server"
+  ],
+  "scripts": {
+    "dev": "npm -w server run dev",
+    "build": "npm -w server run build",
+    "start": "node server/dist/index.js",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_GITHUB_USERNAME/info-submission-page.git"
+  },
+  "keywords": [
+    "express",
+    "typescript",
+    "nodemailer",
+    "mandate",
+    "submission"
+  ],
+  "author": "",
+  "engines": {
+    "node": ">=18"
+  }
+}
