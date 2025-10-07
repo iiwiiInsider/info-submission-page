@@ -1,0 +1,22 @@
+# Render deployment configuration
+services:
+  - type: web
+    name: info-submission-page
+    runtime: node
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+    buildCommand: npm install --workspaces && npm run build
+    startCommand: npm start
+    autoDeploy: true
+    plan: free

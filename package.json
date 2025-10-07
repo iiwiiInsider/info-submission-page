@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "npm -w server run dev",
     "build": "npm -w server run build",
-    "start": "node server/dist/index.js",
+    "build:server": "npm -w server run build",
+    "start": "node scripts/start.js",
     "prepare": "npm run build"
   },
   "repository": {
